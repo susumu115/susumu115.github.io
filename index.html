@@ -1,6 +1,58 @@
-<h2>BMI指標計算</h2>
-<form oninput="bmi.value = Math.round(Number(weight.value) / Math.pow(Number(height.value)/100, 2) * 10) / 10">
-    <p><label>体重(kg)：<input name="weight" type="number" step="any"></label></p>
-    <p><label>身長(cm)：<input name="height" type="number" step="any"></label></p>
-    <p><label>BMI：<output name="bmi"></output></label></p>
-</form>
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+    <meta charset="UTF-8">
+    <title>second</title>
+</head>
+<body>
+
+    <!-- ここから BMI 計算フォーム（先頭に追加） -->
+    <h1>BMI 指標計算フォーム</h1>
+
+    <form id="bmiForm">
+        <label for="height">身長（cm）：</label>
+        <input type="number" id="height" name="height" required>
+        <br>
+
+        <label for="weight">体重（kg）：</label>
+        <input type="number" id="weight" name="weight" required>
+        <br>
+
+        <button type="button" onclick="calcBMI()">BMIを計算</button>
+    </form>
+
+    <p id="bmiResult">BMI：未計算</p>
+
+    <script>
+        function calcBMI() {
+            // 入力値取得
+            const heightCm = parseFloat(document.getElementById('height').value);
+            const weightKg = parseFloat(document.getElementById('weight').value);
+
+            // 入力チェック
+            if (isNaN(heightCm) || isNaN(weightKg) || heightCm <= 0 || weightKg <= 0) {
+                alert('身長と体重を正しく入力してください。');
+                return;
+            }
+
+            // cm → m に変換
+            const heightM = heightCm / 100;
+
+            // BMI計算：BMI = 体重(kg) ÷ (身長(m) × 身長(m))
+            const bmi = weightKg / (heightM * heightM);
+
+            // 小数第2位まで表示
+            document.getElementById('bmiResult').textContent = 'BMI：' + bmi.toFixed(2);
+        }
+    </script>
+    <!-- ここまで BMI 計算フォーム -->
+
+    <!-- ここから先週作成した内容（そのまま残す） -->
+    <!-- 既存の second.html の内容をこの下にそのまま置いておく -->
+    <!-- 例：
+    <h2>先週作成した見出し</h2>
+    <p>ここに先週のコンテンツが入る</p>
+    -->
+
+</body>
+</html>
